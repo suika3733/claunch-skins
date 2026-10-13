@@ -1,0 +1,32 @@
+﻿CLaunch 皮肤：macOS Sonoma
+================================
+
+安装
+----
+1. 把整个 macOS Sonoma 文件夹复制到 CLaunch 安装目录下的 Skin 文件夹里
+   （便携版即 CLaunch.exe 所在目录旁的 Skin\；没有就新建一个）
+2. 在 CLaunch 面板上点右键 -> 选项 -> 外观(皮肤)
+3. 在皮肤列表中选择 macOS Sonoma，点确定
+4. 建议点同一对话框里的"应用推荐设置"，让分页/按钮尺寸与本皮肤对齐
+
+要求
+----
+* CLaunch 4.20 或更高（Unicode 版）
+* 32bpp 显示色深（Windows 默认即是）
+
+设计说明
+--------
+* 窗口：圆角 11px，浅灰工具栏 + 发丝分隔线，主体 #F7F7F9
+* 左上角三个圆钮：关闭(红) / 锁定(黄) / 模式切换(绿)，悬停显示 mac 字形
+* 分页：macOS 分段控制器胶囊样式，选中页为白色
+* 图标按钮：常规无底色，悬停浅灰圆角块，文字悬停变系统蓝
+* 右键子菜单：选中项为 macOS 系统蓝 #0A84FF 白字
+* 字体默认 Microsoft YaHei UI（含中文字形）；想更接近 SF Pro 可自行换成
+  已安装的 SF Pro Text / Inter，改 skin.xml 里的 fontFace 即可
+
+已知取舍
+--------
+* 未内置窗口/菜单投影（CLaunch 的 shadowArea 需把阴影烘进切片图，
+  权衡后选择保持切片简单可靠）
+* 若你的 CLaunch 版本较旧（<4.10），元素名 pinbutton/submenu 可能
+  需改回 lockbutton/foldermenu

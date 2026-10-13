@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CLaunch 皮肤预览 — macOS Sonoma</title>
+<style>
+  :root{
+    --toolbar:#EDEDF0; --body:#F7F7F9; --line:#C9C9CF; --barline:#D6D6DB;
+    --t1:#1D1D1F; --t2:#6E6E73; --t3:#86868B; --accent:#0A84FF;
+    --segn:#EDEDF0; --segh:#E3E3E9; --chip:#FFFFFF; --chipline:#CFCFD5;
+    --hov:#E9E9EE; --down:#DEDEE5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#2A2A2E; color:#E8E8EC;
+    font-family:"SF Pro Text","Segoe UI","Microsoft YaHei UI",system-ui,sans-serif;
+    min-height:100vh; padding:48px 24px 64px;
+    display:flex; flex-direction:column; align-items:center; gap:34px;
+  }
+  h1{font-size:15px;font-weight:500;color:#F2F2F5}
+  .sub{font-size:13px;color:#9A9AA2;margin-top:-22px}
+  .row{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+
+  /* ---- the launcher window ---- */
+  .win{
+    width:432px; background:var(--body);
+    border:1px solid var(--line); border-radius:11px;
+    overflow:hidden; box-shadow:0 18px 48px rgba(0,0,0,.45);
+  }
+  .bar{
+    height:34px; background:var(--toolbar);
+    border-bottom:1px solid var(--barline);
+    display:flex; align-items:center; position:relative;
+  }
+  .lights{position:absolute; left:13px; top:11px; display:flex; gap:8px}
+  .light{width:12px;height:12px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center}
+  .light svg{opacity:0;transition:opacity .12s}
+  .light:hover svg{opacity:1}
+  .light.close{background:#FF5F57}.light.close:hover{background:#FF716A}
+  .light.pin{background:#FEBC2E}.light.pin:hover{background:#FFC84C}
+  .light.mode{background:#28C840}.light.mode:hover{background:#42D158}
+  .title{position:absolute;left:0;right:0;text-align:center;font-size:12px;color:var(--t2);pointer-events:none}
+  .search{
+    position:absolute; right:11px; top:7px; width:20px; height:20px;
+    border-radius:5px; background:transparent;
+    display:flex; align-items:center; justify-content:center; cursor:default;
+  }
+  .search:hover{background:#E3E3E8}.search:active{background:#D8D8DE}
+
+  .tabs{display:flex;gap:2px;padding:9px 10px 6px}
+  .tab{
+    width:74px;height:24px;border-radius:6px;border:1px solid #DCDCE2;
+    background:var(--segn); color:var(--t2); font-size:12px;
+    display:flex;align-items:center;justify-content:center;cursor:default;
+  }
+  .tab:hover{background:var(--segh);border-color:#CFCFD6;color:var(--t1)}
+  .tab.on{background:var(--chip);border-color:var(--chipline);color:var(--t1);font-weight:600}
+
+  .grid{display:grid;grid-template-columns:repeat(6,76px);gap:2px;padding:6px 10px 14px}
+  .cell{
+    width:76px;height:76px;border-radius:10px;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    padding-top:8px;cursor:default;user-select:none;
+  }
+  .cell:hover{background:var(--hov)}
+  .cell:active{background:var(--down)}
+  .cell:hover .lab{color:var(--accent)}
+  .ic{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+  .ic svg{width:22px;height:22px}
+  .lab{margin-top:7px;font-size:12px;color:var(--t1);max-width:70px;overflow:hidden;
+       white-space:nowrap;text-overflow:ellipsis}
+
+  /* ---- submenu ---- */
+  .menu{
+    width:196px;background:var(--body);border:1px solid var(--line);border-radius:10px;
+    padding:3px 4px;box-shadow:0 14px 34px rgba(0,0,0,.42);
+  }
+  .mi{height:22px;border-radius:4px;display:flex;align-items:center;padding:0 9px;font-size:12px;color:var(--t1)}
+  .mi:hover{background:var(--accent);color:#fff}
+  .mi.dis{color:#B4B4B9;pointer-events:none}
+  .mi .k{margin-left:auto;color:var(--t3);font-size:11px}
+  .mi:hover .k{color:rgba(255,255,255,.75)}
+  .msep{height:1px;background:#DDDD E2;background:#DDDDE2;margin:3px 8px}
+
+  /* ---- states strip ---- */
+  .strip{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .card{background:#35353A;border:1px solid #45454C;border-radius:10px;padding:16px 18px}
+  .card h2{font-size:13px;font-weight:500;color:#E4E4EA;margin-bottom:12px}
+  .sw{display:flex;gap:10px;align-items:center}
+  .chip-demo{width:74px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px}
+  .note{font-size:12px;color:#9A9AA2;line-height:1.7;max-width:560px;text-align:center}
+  code{background:#3A3A40;padding:1px 5px;border-radius:4px;font-size:12px;color:#D8D8E0}
+</style>
+</head>
+<body>
+
+<h1>CLaunch 皮肤预览 — macOS Sonoma</h1>
+<p class="sub">按 skin.xml 的 9 宫格规则 1:1 还原 · 悬停可看到交互态</p>
+
+<div class="row">
+  <div class="win">
+    <div class="bar">
+      <div class="lights">
+        <div class="light close"><svg width="7" height="7" viewBox="0 0 7 7"><path d="M1 1L6 6M6 1L1 6" stroke="#7C1A16" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="light pin"><svg width="7" height="7" viewBox="0 0 7 7"><path d="M1 3.5H6" stroke="#8C5F0A" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div class="light mode"><svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 1H3.4M1 1V3.4M7 7H4.6M7 7V4.6" stroke="#0F5F19" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="title">CLaunch</div>
+      <div class="search"><svg width="13" height="13" viewBox="0 0 13 13"><circle cx="5.2" cy="5.2" r="3.6" fill="none" stroke="#1D1D1F" stroke-width="1.35"/><path d="M8 8L11.4 11.4" stroke="#1D1D1F" stroke-width="1.35" stroke-linecap="round"/></svg></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab on">常用</div><div class="tab">工具</div><div class="tab">网络</div><div class="tab">开发</div>
+    </div>
+
+    <div class="grid" id="g"></div>
+  </div>
+
+  <div class="menu">
+    <div class="mi">打开<code class="k">Enter</code></div>
+    <div class="mi">以管理员运行</div>
+    <div class="mi">打开所在文件夹</div>
+    <div class="msep"></div>
+    <div class="mi dis">锁定项目</div>
+    <div class="mi">属性<code class="k">Alt+Enter</code></div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="card">
+    <h2>分页标签（分段控制器）</h2>
+    <div class="sw">
+      <div class="chip-demo" style="background:var(--segn);border:1px solid #DCDCE2;color:var(--t2)">常规</div>
+      <div class="chip-demo" style="background:var(--segh);border:1px solid #CFCFD6;color:var(--t1)">悬停</div>
+      <div class="chip-demo" style="background:var(--chip);border:1px solid var(--chipline);color:var(--t1);font-weight:600">选中</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>窗口按钮（悬停显字形）</h2>
+    <div class="sw">
+      <div class="light close"><svg width="7" height="7" viewBox="0 0 7 7"><path d="M1 1L6 6M6 1L1 6" stroke="#7C1A16" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+      <div class="light pin"><svg width="7" height="7" viewBox="0 0 7 7"><path d="M1 3.5H6" stroke="#8C5F0A" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+      <div class="light mode"><svg width="8" height="8" viewBox="0 0 8 8"><path d="M1 1H3.4M1 1V3.4M7 7H4.6M7 7V4.6" stroke="#0F5F19" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>图标按钮状态</h2>
+    <div class="sw">
+      <div class="chip-demo" style="width:56px;height:44px;border-radius:10px;background:transparent;border:1px dashed #5A5A62;color:#9A9AA2">常规</div>
+      <div class="chip-demo" style="width:56px;height:44px;border-radius:10px;background:var(--hov);color:var(--t1)">悬停</div>
+      <div class="chip-demo" style="width:56px;height:44px;border-radius:10px;background:var(--down);color:var(--t1)">按下</div>
+    </div>
+  </div>
+</div>
+
+<p class="note">
+  安装：把 <code>macOS Sonoma</code> 文件夹整体放进 CLaunch 安装目录的 <code>Skin\</code> 下，
+  然后在 CLaunch 上右键 → <b>选项</b> → <b>外观</b> → 选择「macOS Sonoma」。<br>
+  需要 Unicode 版 CLaunch 4.20+、32bpp 显示模式（普通 Windows 桌面均满足）。
+</p>
+
+<script>
+const apps=[
+  ["#4A90D9","M4 3h5l3 3v7H4z","文件"],["#5E5CE6","M4 4h8v8H4z","备忘"],
+  ["#34C759","M3 8h10M8 3v10","表格"],["#FF9F0A","M8 3a5 5 0 100 10A5 5 0 008 3z","浏览器"],
+  ["#FF375F","M3 6h10v6H3zM3 6l5 3 5-3","邮件"],["#8E8E93","M5 3h6v10H5z","终端"],
+  ["#AF52DE","M8 3l4 8H4z","演示"],["#0A84FF","M3 9l3 3 7-7","任务"],
+  ["#30D158","M4 4h8v8H4z","笔记"],["#FFD60A","M8 2a6 6 0 100 12","日历"],
+  ["#64D2FF","M3 5h10M3 8h10M3 11h10","下载"],["#FF6482","M8 3a3 3 0 013 3c0 3-3 7-3 7S5 9 5 6a3 3 0 013-3z","照片"],
+  ["#BF5AF2","M4 3h8v10H4z","词典"],["#0A84FF","M8 3a5 5 0 015 5H8z","设置"],
+  ["#FF9F0A","M3 10V5h10v5z","计算器"],["#34C759","M3 8a5 5 0 0110 0","音乐"],
+  ["#5E5CE6","M4 4h8v8H4z","画图"],["#8E8E93","M3 3h4v4H3zM9 9h4v4H9z","工具"]
+];
+const g=document.getElementById('g');
+apps.forEach(([c,d,n])=>{
+  const el=document.createElement('div'); el.className='cell';
+  el.innerHTML=`<div class="ic" style="background:${c}">
+    <svg viewBox="0 0 16 16" fill="none"><path d="${d}" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div><div class="lab">${n}</div>`;
+  g.appendChild(el);
+});
+</script>
+</body>
+</html>
